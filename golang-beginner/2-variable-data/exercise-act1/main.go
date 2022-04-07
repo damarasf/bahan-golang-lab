@@ -12,6 +12,8 @@ import (
 // - Input: jari-jari, tinggi
 // - Output: volume tabung
 
+//rumus : V = π * r * r * t
+
 // Contoh:
 // Input:
 // - Masukkan jari-jari alas tabung: 2
@@ -21,4 +23,15 @@ import (
 
 func main() {
 	// TODO: answer here
+	var (
+		r, t, V float64
+	)
+	const pi float64 = 3.14
+	fmt.Print("Masukkan jari-jari : ")
+	fmt.Scan(&r)
+	fmt.Print("Masukkan tinggi : ")
+	fmt.Scan(&t)
+
+	V = pi * r * r * t
+	fmt.Printf("Jadi volumenya adalah : %f", V)
 }
