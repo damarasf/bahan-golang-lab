@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// variadic parameter
+
 // Dari act1-lecture yang diberikan, cobalah untuk mempraktikan kemampuan kalian untuk menyelesaikan kasus ini
 // Fungsi printWord akan melakukan print satu persatu nilai parameter yang diterimanya
 // Contoh nilai parameter yang diterima

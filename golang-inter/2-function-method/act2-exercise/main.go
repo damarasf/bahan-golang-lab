@@ -1,11 +1,12 @@
-//jangan ditunjukkan ke peserta
-//mungkin dikerjakan jika waktu cukup aja
 package main
 
 import "fmt"
 
-//fungsi calculate akan mengembalikan hasil melakukan perhitungan berikut
-//penjumlahan, pengurangan,perkalian,dan pembagian
+// Dari act2-lecture yang diberikan, cobalah untuk mempraktikan kemampuan kalian untuk menyelesaikan kasus ini
+// multiple return values
+
+// fungsi calculate akan mengembalikan hasil melakukan perhitungan berikut
+// penjumlahan, pengurangan,perkalian,dan pembagian
 func main() {
 	sumResult, subtractResult, multiplyResult, divideResult := calculate(4, 4)
 	fmt.Println("hasil penjumlahan", sumResult)
