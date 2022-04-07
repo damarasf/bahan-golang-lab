@@ -2,8 +2,9 @@ package main
 
 import "fmt"
 
+// multiple return, fungsi sebagai parameter
+
 // Dari act2-lecture yang diberikan, cobalah untuk mempraktikan kemampuan kalian untuk menyelesaikan kasus ini
-// multiple return values
 
 // fungsi calculate akan mengembalikan hasil melakukan perhitungan berikut
 // penjumlahan, pengurangan,perkalian,dan pembagian
@@ -18,6 +19,6 @@ func main() {
 
 func calculate(Number1, Number2 int) (sumResult, subtractResult, multiplyResult, divideResult int) {
 	// TODO: answer here
-	
+
 	return
 }
