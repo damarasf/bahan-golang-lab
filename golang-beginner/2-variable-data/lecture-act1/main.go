@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 // Menghitung luas lingkaran
@@ -10,8 +9,8 @@ import (
 // - Output: Jadi luasnya adalah : nilai luar lingkaran
 
 // Contoh
-// - Input: Masukkan sisi : 10
-// - Output: Jadi luasnya adalah : 78.500000
+// - Input: Masukkan jari : 10
+// - Output: Jadi luasnya adalah : 314.000000000000
 
 func main() {
 	var (
@@ -21,6 +20,6 @@ func main() {
 	const pi float64 = 3.14
 	fmt.Printf("Masukkan jari-jari : ")
 	fmt.Scan(&r)
-	area = pi * (math.Pow(r, 2))
+	area = pi * r * r
 	fmt.Printf("Jadi luasnya adalah : %f", area)
 }
