@@ -10,7 +10,7 @@ func main() {
 	createSentence("halo")
 	createSentence("halo", "selamat siang")
 	createSentence("halo", "andi", "dan", "bagus")
-	createSentence("mencoba", "variadic", "param", "pada", "go")
+	createSentence("mencoba", "variadic", "param", "pada", "go", "lang", "golang")
 }
 
 func createSentence(words ...string) {

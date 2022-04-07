@@ -26,4 +26,9 @@ func (s student) getNameAt(i int) string {
 
 func main() {
 	//TODO: Answer here
+	var s1 = student{"Bintang Anugrah", 10}
+	s1.sayHello()
+
+	var s2 = s1.getNameAt(2)
+	fmt.Println("nama panggilan :", s2)
 }

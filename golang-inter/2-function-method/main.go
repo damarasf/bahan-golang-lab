@@ -3,9 +3,12 @@ package main
 import "fmt"
 
 func main() {
-	hello()
+	fmt.Println(IsEvenNumber(9))
 }
 
-func hello() {
-	fmt.Println("halo dari dalam fungsi")
+func IsEvenNumber(number int) bool {
+	if number%2 == 0 {
+		return true
+	}
+	return false
 }

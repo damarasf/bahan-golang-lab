@@ -19,6 +19,9 @@ func main() {
 
 func calculate(Number1, Number2 int) (sumResult, subtractResult, multiplyResult, divideResult int) {
 	// TODO: answer here
-
-	return
+	sumResult = Number1 + Number2
+	subtractResult = Number1 - Number2
+	multiplyResult = Number1 * Number2
+	divideResult = Number1 / Number2
+	return sumResult, subtractResult, multiplyResult, divideResult
 }

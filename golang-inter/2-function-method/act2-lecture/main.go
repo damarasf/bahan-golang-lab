@@ -7,7 +7,8 @@ func main() {
 	// dengan nilai yang diberikan 10 dan 20
 	sumResult, multiplyResult := calculate(10, 20)
 	fmt.Printf("%d dan %d\n", sumResult, multiplyResult)
-	fmt.Println(calculate(5, 5))
+
+	fmt.Println(calculate(10, 20))
 }
 
 func calculate(angka1, angka2 int) (int, int) {
