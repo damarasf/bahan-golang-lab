@@ -40,4 +40,19 @@ func main() {
 	fmt.Scan(&choice)
 
 	//TODO: answer here
+	if choice == 1 {
+		result = num1 + num2
+		fmt.Println("Result: ", result)
+	} else if choice == 2 {
+		result = num1 - num2
+		fmt.Println("Result: ", result)
+	} else if choice == 3 {
+		result = num1 * num2
+		fmt.Println("Result: ", result)
+	} else if choice == 4 {
+		result = num1 / num2
+		fmt.Println("Result: ", result)
+	} else {
+		fmt.Println("Invalid choice")
+	}
 }

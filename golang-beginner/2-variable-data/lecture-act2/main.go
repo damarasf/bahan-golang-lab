@@ -28,7 +28,7 @@ func main() {
 	fmt.Scan(&b)
 	fmt.Print("Masukkan operator : ")
 	fmt.Scan(&operator)
-	
+
 	if operator == "+" {
 		c = a + b
 		fmt.Println("Hasilnya adalah : ", c)
