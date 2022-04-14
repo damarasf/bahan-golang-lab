@@ -112,15 +112,15 @@ func initDatabase() (*sql.DB, error) {
 			- nilai_test.go
 	*/
 
-	// if err = model.CreateTable(db, model.TabelMatkul); err != nil {
-	// 	fmt.Println("Gagal membuat table matkul")
-	// 	return nil, err
-	// }
+	if err = model.CreateTable(db, model.TabelMatkul); err != nil {
+		fmt.Println("Gagal membuat table matkul")
+		return nil, err
+	}
 
-	// if err = model.CreateTable(db, model.TabelNilai); err != nil {
-	// 	fmt.Println("Gagal membuat table nilai")
-	// 	return nil, err
-	// }
+	if err = model.CreateTable(db, model.TabelNilai); err != nil {
+		fmt.Println("Gagal membuat table nilai")
+		return nil, err
+	}
 
 	return db, nil
 }
