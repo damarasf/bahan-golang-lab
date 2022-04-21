@@ -2,11 +2,11 @@ package main
 
 import "fmt"
 
-func naikGaji(gajiAwal *int, gajiAkhir *int){
+func naikGaji(gajiAwal *int, gajiAkhir *int) {
 	*gajiAwal = *gajiAkhir
 }
 
-func main () {
+func main() {
 	var gajiSekarang, expektasiGaji int
 
 	fmt.Print("Masukkan gaji anda: ")
