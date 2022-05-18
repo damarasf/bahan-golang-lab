@@ -19,7 +19,7 @@ func dbConn() (db *sql.DB) {
 	dbDriver := "mysql"
 	dbUser := "root"
 	dbPass := ""
-	dbName := "nama_npm"
+	dbName := "damara_51418626"
 	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(localhost)/"+dbName)
 	if err != nil {
 		panic(err.Error())

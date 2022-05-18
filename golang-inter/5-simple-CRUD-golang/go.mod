@@ -1,4 +1,4 @@
-module damara_51418626_pert5
+module pert_5_inter
 
 go 1.17
 
