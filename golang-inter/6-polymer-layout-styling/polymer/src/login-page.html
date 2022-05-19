@@ -1,0 +1,93 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<!-- TODO: -->
+<dom-module id="login-page">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      input[type=text], [type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+
+    <div class="card">
+      <div class="circle">1</div>
+      <h1>Login</h1>
+      <!-- TODO: -->
+      <form action="#" method="#">
+        <label>Username</label>
+        <input type="text" name="username" value="{{ username }}" on-input="handleChange" placeholder="Username...">
+        <label>Password</label>
+        <input type="password" name="password" value="{{ password }}" on-input="handleChange" placeholder="Password...">
+        <button type="submit" on-click="handleLogin">Login</button>
+      </form>
+    </div>
+  </template>
+
+  <script>
+    class LoginPage extends Polymer.Element {
+      static get is() { return 'login-page'; }
+      // TODO:
+      static get properties() {
+        return {
+          username : String,
+          password : String,
+          isAdmin : {
+            type : Boolean,
+            notify : true,
+          }
+        }
+      }
+
+      handleChange(e) {
+        this[e.target.name] = e.target.value;
+      }
+
+      handleLogin(e) {
+        if (this.username === "admin" && this.password === "admin") {
+          this.isAdmin = true
+          window.history.pushState({}, null, "/message-page")
+          window.dispatchEvent(new CustomEvent("location-changed"))
+          return
+
+        }
+
+        this.isAdmin = false
+        alert("Mohon login sebagai admin")
+      }
+    }
+    
+
+    window.customElements.define(LoginPage.is, LoginPage);
+  </script>
+</dom-module>
