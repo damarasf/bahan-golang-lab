@@ -1,0 +1,42 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<!-- TODO: -->
+<dom-module id="about-page">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card">
+      <h1>Tentang Saya</h1>
+      <h2>Haloo kawan-kawan semua :)</h2>
+      <p>Ini adalah website pertama saya menggunakan Polymer.</p>
+      <p>Perkenalkan, nama saya Damara</p>
+      <p>Saya dari kelas 4IA188</p>
+      <p>NPM saya yaitu 51418626</p>
+    </div>
+  </template>
+  <script>
+    // TODO:
+    class AboutPage extends Polymer.Element {
+      static get is() { return 'about-page'; }
+    }
+
+    window.customElements.define(AboutPage.is, AboutPage);
+  </script>
+</dom-module>
