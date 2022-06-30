@@ -1,0 +1,102 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="form-edit">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+
+                padding: 10px;
+            }
+        </style>
+
+        <h2>Ubah Data Mahasiswa</h2>
+        <input type="hidden" value="{{formData.id::input}}">
+        <paper-input-container>
+            <iron-input slot="input">
+                <input type="text" value="{{formData.npm::input}}" placeholder="Npm">
+            </iron-input>
+        </paper-input-container>
+        <paper-input-container>
+            <iron-input slot="input">
+                <input type="text" value="{{formData.nama::input}}" placeholder="Nama">
+            </iron-input>
+        </paper-input-container>
+        <paper-input-container>
+            <iron-input slot="input">
+                <input type="text" value="{{formData.kelas::input}}" placeholder="Kelas">
+            </iron-input>
+        </paper-input-container>
+
+        <div class="buttons">
+            <paper-button raised class="link" on-click="editMahasiswa" style="margin-top: 20px;" dialog-confirm>Ubah Data
+            </paper-button>
+        </div>
+
+        <iron-ajax auto id="getMahasiswaAjax" url="{{mhsurl}}" method="GET" handle-as="json"
+            content-type="application/json" on-response="_handleGet">
+            </iron-ajax>
+            <iron-ajax auto id="editMahasiswaAjax" url="{{url}}" method="{{method}}" handle-as="text"
+                content-type="application/json" on-response="_handleUpdate">
+                </iron-ajax>
+    </template>
+
+    <script>
+        class FormEdit extends Polymer.Element {
+            static get is() { return 'form-edit'; }
+
+            static get properties() {
+                return {
+                    formData: {
+                        type: Object,
+                        value: function () {
+                            return { id: 0, npm: '', nama: '', kelas: '' }
+                        }
+                    },
+                    url: String,
+                    mhsurl: {
+                        computed: '_computeUrl(uid)'
+                    },
+                    method: String,
+                    success: {
+                        type: String,
+                        notify: true
+                    },
+                    response: {
+                        type: Object,
+                        notify: true
+                    },
+                    uid: Number,
+                }
+            }
+
+            _computeUrl(uid) {
+                return ['/api/mahasiswa', uid].join('/');
+            }
+
+            editMahasiswa() {
+                this.url = '/api/mahasiswa';
+                this.method = 'PUT';
+                this.success = 'Data mahasiswa berhasil diubah';
+                this.$.editMahasiswaAjax.params = this.formData;
+                this.formData = {};
+            }
+
+            _handleUpdate(e) {
+                this.method = 'GET';
+                this.set('response', JSON.parse(e.detail.response));
+            }
+            _handleGet(e) {
+                this.set('formData', e.detail.response.data);
+            }
+
+        }
+        
+        window.customElements.define(FormEdit.is, FormEdit);
+    </script>
+</dom-module>

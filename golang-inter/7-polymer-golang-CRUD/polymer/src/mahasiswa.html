@@ -1,0 +1,172 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../bower_components/vaadin-grid/theme/material/vaadin-grid.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="element/form-add.html">
+<link rel="import" href="element/form-edit.html">
+<link rel="import" href="element/form-delete.html">
+
+<dom-module id="mahasiswa-page">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+    <custom-style>
+      <style is="custom-style">
+        paper-input-container {
+          width: 30%;
+          float: right;
+        }
+
+        paper-dialog#deleteModal {
+          width: 250px;
+          max-width: 250px;
+        }
+
+        .warning,
+        .danger {
+          margin-left: -20px;
+        }
+      </style>
+    </custom-style>
+
+    <div class="card">
+      <h1>Data Mahasiswa</h1>
+      <p>Data Mahasiswa yang terdapat pada database</p>
+      <template is="dom-if" if="[[success]]">
+        <p class="alert-success"><strong>Message:</strong> [[success]]</p>
+      </template>
+
+      <!-- Get data from rest api -->
+      <iron-ajax auto url="{{url}}" method="{{method}}" handle-as="json" content-type="application-json"
+        last-response="{{response}}"></iron-ajax>
+      <paper-button raised class="link" style="margin-bottom: 20px;" on-click="openAddModal">Tambah Data</paper-button>
+      <paper-input-container no-label-float>
+        <label slot="label">Search..</label>
+        <iron-input slot="input">
+          <input type="text" value="{{keyword::input}}" width="30%">
+        </iron-input>
+      </paper-input-container>
+
+      <!-- Datatable -->
+      <vaadin-grid items="{{response.data}}">
+        <vaadin-grid-column width="50px">
+          <template class="header">#</template>
+          <template>
+            <div>[[index]]</div>
+          </template>
+        </vaadin-grid-column>
+        <vaadin-grid-column width="80px">
+          <template class="header">Profile</template>
+          <template>
+            <img src="/img/[[item.profile]]" alt="profile" width="20px">
+          </template>
+        </vaadin-grid-column>
+        <vaadin-grid-column>
+          <template class="header">Npm</template>
+          <template>
+            <div>[[item.npm]]</div>
+          </template>
+        </vaadin-grid-column>
+        <vaadin-grid-column width="150px">
+          <template class="header">Nama</template>
+          <template>
+            <div>[[item.nama]]</div>
+          </template>
+        </vaadin-grid-column>
+        <vaadin-grid-column>
+          <template class="header">Kelas</template>
+          <template>
+            <div>[[item.kelas]]</div>
+          </template>
+        </vaadin-grid-column>
+        <vaadin-grid-column width="200px">
+          <template class="header">Action</template>
+          <template>
+            <paper-button id="[[item.id]]" class="warning" on-click="openEditModal">Edit
+            </paper-button>
+            <paper-button id="[[item.id]]" class="danger" on-click="openDeleteModal">Delete   
+            </paper-button>
+          </template>
+        </vaadin-grid-column>
+      </vaadin-grid>
+      <!-- End of datatable -->
+
+      <!-- Crud view modal -->
+      <paper-dialog id="addModal" with-backdrop>
+        <form-add success="{{success}}" response="{{response}}"></form-add>
+      </paper-dialog>
+      <paper-dialog id="editModal" with-backdrop>
+        <form-edit uid="{{uid}}" success="{{success}}" response="{{response}}"></form-edit>
+      </paper-dialog>
+      <paper-dialog id="deleteModal" with-backdrop>
+        <form-delete uid="{{uid}}" success="{{success}}" response="{{response}}"></form-delete>
+      </paper-dialog>
+      <!-- End of modal -->
+
+    </div>
+  </template>
+
+  <script>
+    class MahasiswaPage extends Polymer.Element {
+      static get is() { return 'mahasiswa-page'; }
+
+      static get properties() {
+        return {
+          response: {
+            type: Object,
+          },
+          keyword: {
+            type: String,
+            value: ''
+          },
+          url: {
+            computed: '_computeUrl(keyword)'
+          },
+          method: {
+            type: String,
+            value: "GET"
+          },
+          success: String,
+          uid: {
+            type: Number,
+            notify: true
+          }
+        }
+      }
+
+      _computeUrl(keyword) {
+        if (keyword) {
+          return ['/mahasiswa/search', keyword].join('/');
+        } else {
+          return '/api/mahasiswa';
+        }
+      }
+
+      openAddModal() {
+        this.$.addModal.open();
+      }
+
+      openEditModal(e) {
+        this.uid = e.target.id;
+        this.$.editModal.open();
+      }
+
+      openDeleteModal(e) {
+        this.uid = e.target.id;
+        this.$.deleteModal.open();
+      }
+    }
+    
+    window.customElements.define(MahasiswaPage.is, MahasiswaPage);
+  </script>
+</dom-module>

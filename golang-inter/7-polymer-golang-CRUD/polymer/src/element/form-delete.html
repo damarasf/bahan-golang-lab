@@ -1,0 +1,61 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="form-delete">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+
+                padding: 10px;
+            }
+        </style>
+
+        <h2>Yakin hapus data?</h2>
+
+        <div class="buttons">
+            <paper-button class="link" dialog-dismiss>Batal</paper-button>
+            <paper-button class="danger" on-click="deleteMahasiswa" raised dialog-confirm>Hapus</paper-button>
+        </div>
+
+        <iron-ajax auto url="{{url}}" method="{{method}}" handle-as="json" content-type="application/json"
+            on-response="_handleDelete"></iron-ajax>
+    </template>
+
+    <script>
+        class FormDelete extends Polymer.Element {
+            static get is() { return 'form-delete'; }
+
+            static get properties() {
+                return {
+                    uid: Number,
+                    url: String,
+                    method: String,
+                    success: {
+                        type: String,
+                        notify: true
+                    },
+                    response: {
+                        type: Object,
+                        notify: true
+                    }
+                }
+            }
+
+            deleteMahasiswa() {
+                this.method = 'DELETE';
+                this.url = '/api/mahasiswa/' + this.uid;
+                this.success = 'Data mahasiswa berhasil dihapus';
+            }
+            _handleDelete(e) {
+                this.method = 'GET';
+                this.url = '/api/mahasiswa';
+                this.set('response', e.detail.response);
+            }
+        }
+        
+        window.customElements.define(FormDelete.is, FormDelete);
+    </script>
+</dom-module>

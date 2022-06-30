@@ -1,0 +1,101 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.gi
+thub.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIB
+UTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENT
+S.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="form-add">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                padding: 10px;
+            }
+        </style>
+
+        <h2>Tambah Data User</h2>
+        <paper-input-container>
+            <iron-input slot="input">
+                <input type="text" value="{{formData.npm::input}}" placeholder="Npm">
+            </iron-input>
+        </paper-input-container>
+        <paper-input-container>
+            <iron-input slot="input">
+                <input type="text" value="{{formData.nama::input}}" placeholder="Nama">
+            </iron-input>
+        </paper-input-container>
+        <paper-input-container>
+            <iron-input slot="input">
+                <input type="text" value="{{formData.kelas::input}}" placeholder="Kelas">
+            </iron-input>
+        </paper-input-container>
+        <div class="buttons">
+            <paper-button raised class="link" on-click="addMahasiswa" style="margin-top: 20px;" dialog-confirm>Tambah Data
+            </paper-button>
+        </div>
+
+        <iron-ajax auto id="mahasiswaAjax" url="{{url}}" method="{{method}}" handle-as="text"
+            content-type="application/json" on-response="_handleInsert">
+            </iron-ajax>
+    </template>
+
+    <script>
+        class FormAdd extends Polymer.Element {
+            static get is() { return 'form-add'; }
+
+            static get properties() {
+                return {
+                    formData: {
+                        type: Object,
+                        value: function () {
+                            return { id: 0, npm: '', nama: '', kelas: '' }
+                        }
+                    },
+                    url: {
+                        type: String,
+                        value: '/api/mahasiswa'
+                    },
+                    method: {
+                        type: String,
+                        value: 'GET'
+                    },
+                    success: {
+                        type: String,
+                        notify: true
+                    },
+                    response: {
+                        type: Object,
+                        notify: true
+                    }
+                }
+            }
+
+            addMahasiswa() {
+                this.url = '/api/mahasiswa';
+                this.method = 'POST';
+                this.success = 'Data mahasiswa berhasil ditambahkan';
+                this.$.mahasiswaAjax.params = this.formData;
+                this.formData = {};
+            }
+            _handleInsert(e) {
+                this.method = 'GET';
+                this.set('response', JSON.parse(e.detail.response));
+            }
+        }
+        
+        window.customElements.define(FormAdd.is, FormAdd);
+    </script>
+</dom-module>
