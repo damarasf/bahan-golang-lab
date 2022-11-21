@@ -1,2 +1,2 @@
-# Bahan Ajar Golang
-Ini merupakan repositori untuk bahan ajar materi Golang
+# Bahan Ajar Golang Lab
+Ini merupakan repositori untuk bahan ajar materi Golang Lab
